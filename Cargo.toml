@@ -1,12 +1,14 @@
 [package]
-name = "iterator"
-edition.workspace = true
-version = "0.0.1"
-license.workspace = true
-repository.workspace = true
-authors.workspace = true
-publish = false
-description = "CosmWasm contract iterator PoC"
+name          = "iterator"
+edition       = "2021"
+version       = "0.0.1"
+license       = "Apache-2.0"
+repository    = "https://github.com/babylonchain/babylon-contract"
+authors       = ["Mauro Lacy <mauro@babylonchain.io>"]
+publish       = false
+description   = "CosmWasm contract iterator PoC"
+
+resolver  = "2"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -24,13 +26,24 @@ backtraces = ["cosmwasm-std/backtraces", "cosmwasm-vm/backtraces"]
 library = []
 
 [dependencies]
-cosmwasm-schema  = { workspace = true }
-cosmwasm-std     = { workspace = true }
-cw2              = { workspace = true }
-cw-storage-plus  = { workspace = true }
-cw-utils         = { workspace = true }
-hex              = { workspace = true }
-thiserror        = { workspace = true }
+cosmwasm-schema   = "1.5.2"
+cosmwasm-std      = { version = "1.5.2", features = ["iterator"] }
+cw2               = "1.1.2"
+cw-storage-plus   = "1.2.0"
+cw-utils          = "1.0.3"
+hex               = "0.4.3"
+thiserror         = "1.0.40"
 
 [dev-dependencies]
-cosmwasm-vm      = { workspace = true }
+cosmwasm-vm       = { version = "1.5.2", default-features = false, features = ["iterator"] }
+
+[profile.release]
+codegen-units     = 1
+debug             = false
+debug-assertions  = false
+lto               = true
+panic             = 'abort'
+rpath             = false
+opt-level         = 3
+overflow-checks   = true
+incremental       = false
