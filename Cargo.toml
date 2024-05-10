@@ -18,11 +18,9 @@ crate-type = ["cdylib", "rlib"]
 [features]
 # Add feature "cranelift" to default if you need 32 bit or ARM support
 default = []
-# Use cranelift backend instead of singlepass. This is required for development on 32 bit or ARM machines.
-cranelift = ["cosmwasm-vm/cranelift"]
 # for quicker tests, cargo test --lib
 # for more explicit tests, cargo test --features=backtraces
-backtraces = ["cosmwasm-std/backtraces", "cosmwasm-vm/backtraces"]
+backtraces = ["cosmwasm-std/backtraces"]
 library = []
 
 [dependencies]
@@ -30,12 +28,6 @@ cosmwasm-schema   = "1.5.2"
 cosmwasm-std      = { version = "1.5.2", features = ["iterator"] }
 cw2               = "1.1.2"
 cw-storage-plus   = "1.2.0"
-cw-utils          = "1.0.3"
-hex               = "0.4.3"
-thiserror         = "1.0.40"
-
-[dev-dependencies]
-cosmwasm-vm       = { version = "1.5.2", default-features = false, features = ["iterator"] }
 
 [profile.release]
 codegen-units     = 1
